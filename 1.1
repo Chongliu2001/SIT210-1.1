@@ -1,0 +1,70 @@
+// Define the Morse code timing parameters
+int dotTime = 200;  // Duration of a dot (milliseconds)
+int dashTime = 600; // Duration of a dash (milliseconds)
+int elementSpace = 200;  // Space between elements of a letter
+int letterSpace = 400;   // Space between letters
+int wordSpace = 1400;    // Space between words (if needed)
+
+// Pin configuration
+int ledPin = LED_BUILTIN;  // The built-in LED pin
+
+// Setup configuration for pin modes
+void setup() {
+  pinMode(ledPin, OUTPUT);
+}
+
+// The loop function continuously blinks the Morse code for the name
+void loop() {
+  blinkMorse('C');
+  delay(letterSpace);
+  blinkMorse('H');
+  delay(letterSpace);
+  blinkMorse('O');
+  delay(letterSpace);
+  blinkMorse('N');
+  delay(letterSpace);
+  blinkMorse('G');
+  delay(wordSpace);  // Wait longer after finishing the name before repeating
+}
+
+// Function to blink a letter in Morse code
+void blinkMorse(char letter) {
+  switch(letter) {
+    case 'C':
+      // Morse for 'C' is -.-.
+      dash(); dot(); dash(); dot();
+      break;
+    case 'H':
+      // Morse for 'H' is ....
+      dot(); dot(); dot(); dot();
+      break;
+    case 'O':
+      // Morse for 'O' is ---
+      dash(); dash(); dash();
+      break;
+    case 'N':
+      // Morse for 'N' is -.
+      dash(); dot();
+      break;
+    case 'G':
+      // Morse for 'G' is --.
+      dash(); dash(); dot();
+      break;
+  }
+}
+
+// Function to blink a dot
+void dot() {
+  digitalWrite(ledPin, HIGH);
+  delay(dotTime);
+  digitalWrite(ledPin, LOW);
+  delay(elementSpace);
+}
+
+// Function to blink a dash
+void dash() {
+  digitalWrite(ledPin, HIGH);
+  delay(dashTime);
+  digitalWrite(ledPin, LOW);
+  delay(elementSpace);
+}
